@@ -50,6 +50,11 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
 sudo apt-get update
 sudo apt-get install jenkins
+
+**Note  : Once you installed Jenkins run the below commands to check the status of jenkins whether its running if not then run the mention command to start jenkins
+sudo systemctl status jenkins
+in case you see the stautus failed
+sudo systemctl start jenkins
 ```
 
 **Note: ** By default, Jenkins will not be accessible to the external world due to the inbound traffic restriction by AWS. Open port 8080 in the inbound traffic rules as show below.
