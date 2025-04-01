@@ -10,7 +10,9 @@ This is a MVC architecture based application where controller returns a page wit
 Checkout the repo and move to the directory
 
 ```
-git clone https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero/java-maven-sonar-argocd-helm-k8s/sprint-boot-app
+git clone git@github.com:iam-veeramalla/Jenkins-Zero-To-Hero.git is the command to clone
+![image](https://github.com/user-attachments/assets/061c9a26-23bc-45e2-928a-8342dba8fb3a)
+
 cd java-maven-sonar-argocd-helm-k8s/sprint-boot-app
 ```
 
