@@ -1,13 +1,14 @@
-# You can change this base image to anything else
-# But make sure to use the correct version of Java
-FROM adoptopenjdk/openjdk11:alpine-jre
+# Use an official Maven runtime as a parent image
+FROM maven:3.8.6-openjdk-11
 
-# Simply the artifact path
-ARG artifact=target/spring-boot-web.jar
+# Set the working directory
+WORKDIR /usr/src/app
 
-WORKDIR /opt/app
+# Copy the local code to the container
+COPY . .
 
-COPY ${artifact} app.jar
+# Build the application
+RUN mvn clean install
 
-# This should not be changed
-ENTRYPOINT ["java","-jar","app.jar"]
+# Define the command to run the application
+CMD ["mvn", "spring-boot:run"]
