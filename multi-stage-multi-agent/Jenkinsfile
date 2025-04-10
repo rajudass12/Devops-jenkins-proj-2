@@ -1,24 +1,57 @@
 pipeline {
   agent none
+
   stages {
+    stage('Checkout') {
+      agent any
+      steps {
+        checkout scm
+      }
+    }
+
     stage('Back-end') {
       agent {
         docker { image 'maven:3.8.1-adoptopenjdk-11' }
       }
       steps {
-        sh 'mvn clean install'
+        dir('backend') {
+          sh 'mvn clean install'
+        }
+      }
+      post {
+        success {
+          archiveArtifacts artifacts: 'backend/target/*.jar', allowEmptyArchive: true
+        }
       }
     }
+
     stage('Front-end') {
       agent {
         docker { image 'node:16-alpine' }
       }
       steps {
-        sh '''
-          npm install
-          npm run build
-        '''
+        dir('frontend') {
+          sh '''
+            npm install
+            npm run build
+          '''
+        }
+      }
+      post {
+        success {
+          archiveArtifacts artifacts: 'frontend/build/**/*', allowEmptyArchive: true
+        }
       }
     }
   }
+
+  post {
+    success {
+      echo 'Pipeline completed successfully!'
+    }
+    failure {
+      echo 'Pipeline failed!'
+    }
+  }
 }
+
