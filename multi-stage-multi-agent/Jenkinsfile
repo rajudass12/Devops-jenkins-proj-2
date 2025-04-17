@@ -18,4 +18,12 @@ pipeline {
       }
     }
   }
-}
+#thi is usefull and keaningfull}
+
+# this is second change + modifications line.
+
+<<<<<<< HEAD
+# this is third one.
+=======
+  # This is 3rd test test.
+>>>>>>> 2edb5cc228fd80645e6b454ef9e38185658c7d7a
