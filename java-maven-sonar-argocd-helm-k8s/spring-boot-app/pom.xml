@@ -50,6 +50,7 @@
     </dependencies>
 
     <build>
+             
 
         <finalName>spring-boot-web</finalName>
 
@@ -70,6 +71,11 @@
 
         </plugins>
     </build>
-
+    <distributionManagement>
+    <respository>
+             <id>maven</id>
+             <url>http://43.201.60.238:8081/repository/maven</url>
+    </respository>
+    </distributionManagement>       
 
 </project>
