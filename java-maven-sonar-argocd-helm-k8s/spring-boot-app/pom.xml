@@ -72,10 +72,10 @@
         </plugins>
     </build>
     <distributionManagement>
-    <respository>
+    <repository>
              <id>maven</id>
              <url>http://43.201.60.238:8081/repository/maven</url>
-    </respository>
+    </repository>
     </distributionManagement>       
 
 </project>
