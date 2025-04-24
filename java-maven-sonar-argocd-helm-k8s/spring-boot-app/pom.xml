@@ -76,6 +76,6 @@
              <id>maven</id>
              <url>http://43.201.51.225:8081/repository/maven</url>
     </repository>
-    </distributionManagement>       
+    </distributionManagement>      
 
 </project>
