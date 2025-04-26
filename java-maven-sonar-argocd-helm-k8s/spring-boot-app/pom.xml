@@ -70,6 +70,11 @@
 
         </plugins>
     </build>
-
+       <distributionManagement>		
+		<repository>
+		    <id>venkat</id>
+		    <url>http://65.0.85.127:8081/repository/venkat/</url>
+		</repository>
+  </distributionManagement>
 
 </project>
