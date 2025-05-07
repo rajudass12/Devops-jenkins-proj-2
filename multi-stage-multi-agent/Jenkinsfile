@@ -3,18 +3,25 @@ pipeline {
   stages {
     stage('Back-end') {
       agent {
-        docker { image 'maven:3.9.1-adoptopenjdk-11' }
+        docker { image 'maven:3.9.1-eclipse-temurin-11' }
       }
       steps {
-        sh 'mvn --version'
+        sh '''
+          javac HelloWorld.java
+          java HelloWorld
+        '''
       }
     }
+
     stage('Front-end') {
       agent {
         docker { image 'node:16-alpine' }
       }
       steps {
-        sh 'node --version'
+        sh '''
+          echo 'console.log("Hello from Node.js Frontend!");' > hello.js
+          node hello.js
+        '''
       }
     }
   }
