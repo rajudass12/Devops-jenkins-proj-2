@@ -73,15 +73,15 @@ sudo unzip sonarqube-10.4.1.88267.zip
 bash:
 sudo mv sonarqube-10.4.1.88267 sonarqube
 sudo chown -R sonarqube:sonarqube /opt/sonarqube
-✅ 5. Start SonarQube
+ 5. Start SonarQube
 bash:
 sudo su - sonarqube -s /bin/bash
 cd /opt/sonarqube/bin/linux-x86-64
 ./sonar.sh start
-✅ 6. (Optional) View logs to ensure it started correctly
+ 6. (Optional) View logs to ensure it started correctly
 bash:
 tail -f /opt/sonarqube/logs/sonar.log
-✅ 7. Access SonarQube
+ 7. Access SonarQube
 Open in your browser:
 http://<your-ec2-public-ip>:9000
 Default login:
