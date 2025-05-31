@@ -31,6 +31,10 @@ The above maven target stroes the artifacts to the `target` directory. You can e
 ```
 java -jar target/spring-boot-web.jar
 ```
+### To avoid port conflict
+'''
+java -jar target/spring-boot-web.jar --server.port=8010
+'''
 
 ### The Docker way
 
