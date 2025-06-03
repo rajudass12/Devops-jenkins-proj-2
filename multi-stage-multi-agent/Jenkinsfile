@@ -3,19 +3,32 @@ pipeline {
   stages {
     stage('Back-end') {
       agent {
-        docker { image 'maven:3.8.1-adoptopenjdk-11' }
+        docker { image 'openjdk:11-jdk-slim' }
       }
       steps {
-        sh 'mvn --version'
+        // Create HelloWorld.java, compile, and run it
+        sh '''
+          echo 'public class HelloWorld {
+              public static void main(String[] args) {
+                  System.out.println("Hello, World from Jenkins!");
+              }
+          }' > HelloWorld.java
+
+          javac HelloWorld.java
+          java HelloWorld
+        '''
       }
     }
+
     stage('Front-end') {
       agent {
         docker { image 'node:16-alpine' }
       }
       steps {
+        // Print Node.js version
         sh 'node --version'
       }
     }
   }
 }
+
