@@ -8,8 +8,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        sh 'echo passed'
-        //git branch: 'main', url: 'https://github.com/AbdulR431/CI-CD-setup-Jenkins.git'
+        git branch: 'main', url: 'https://github.com/AbdulR431/CI-CD-setup-Jenkins.git'
       }
     }
     stage('Build and Test') {
