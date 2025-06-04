@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'shaikabdul431/maven-java17-ultimate-ci-cd-project-image:v1'
+      image 'shaikabdul431/maven-java17-ultimate-ci-cd-project-image:v2'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
