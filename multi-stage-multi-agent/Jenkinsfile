@@ -9,10 +9,12 @@ pipeline {
                 }
             }
             steps {
-                script {
-                    echo 'Building Java Hello World'
+                dir('multi-stage-multi-agent') {
+                    script {
+                        echo 'Building Java Hello World'
+                    }
+                    sh 'mvn clean compile'
                 }
-                sh 'mvn clean compile'
             }
         }
 
@@ -23,10 +25,12 @@ pipeline {
                 }
             }
             steps {
-                script {
-                    echo 'Running HelloWorld class'
+                dir('multi-stage-multi-agent') {
+                    script {
+                        echo 'Running HelloWorld class'
+                    }
+                    sh 'java -cp target/classes com.example.HelloWorld'
                 }
-                sh 'java -cp target/classes com.example.HelloWorld'
             }
         }
     }
