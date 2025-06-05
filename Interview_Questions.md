@@ -136,4 +136,8 @@ Q: What are some of the common plugins that you use in Jenkins ?
 
 A: Be prepared for answer, you need to have atleast 3-4 on top of your head, so that interview feels you use jenkins on a day-to-day basis.
 
+Q: What is a shared linrary ?
+
+A: In Jenkins, a shared library is a reusable collection of Groovy scripts and other code that can be used across multiple Jenkins pipelines. It allows for code reusability, standardization, and easier maintenance of CI/CD pipelines. 
+
 
