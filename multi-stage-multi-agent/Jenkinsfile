@@ -1,38 +1,22 @@
-pipeline {
-    agent none
-    stages {
-        stage('Build') {
-            agent {
-                docker {
-                    image 'maven:3.9.4-eclipse-temurin-17'
-                    args '-v $HOME/.m2:/root/.m2'
-                }
-            }
-            steps {
-                dir('multi-stage-multi-agent') {
-                    script {
-                        echo 'Building Java Hello World'
-                    }
-                    sh 'mvn clean compile'
-                }
-            }
+stage('Run') {
+    agent {
+        docker {
+            image 'eclipse-temurin:17-jre'
         }
-
-        stage('Run') {
-            agent {
-                docker {
-                    image 'eclipse-temurin:17-jre'
-                }
-            }
-            steps {
-                dir('multi-stage-multi-agent') {
-                    script {
-                        echo 'Running HelloWorld class'
-                    }
-                    sh 'java -cp target/classes com.example.HelloWorld'
-                }
-            }
+    }
+    steps {
+        script {
+            echo 'Running HelloWorld class'
         }
+        sh '''
+            cd multi-stage-multi-agent
+            if [ ! -f target/classes/com/example/HelloWorld.class ]; then
+                echo "Compiled class not found!"
+                ls -R target
+                exit 1
+            fi
+            java -cp target/classes com.example.HelloWorld
+        '''
     }
 }
 
