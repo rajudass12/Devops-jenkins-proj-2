@@ -61,6 +61,7 @@ pipeline {
         withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
           sh '''
             cd java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/
+            git config --global --add safe.directory /var/lib/jenkins/workspace/CI-CD-Job
             sed -i "s#replaceImageTag#${BUILD_NUMBER}#g" deployment.yml
             git add spring-boot-app-manifests/deployment.yml
             git commit -m "Update deployment image to version ${BUILD_NUMBER}" || echo "No changes to commit"
