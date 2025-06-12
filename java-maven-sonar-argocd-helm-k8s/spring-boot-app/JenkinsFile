@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
       image 'shaikabdul431/maven-java17-ultimate-ci-cd-project-image:v2'
-      args '--user root -v /home/jenkins/agent/workspace:/workspace -w /workspace'
+      args "--user root -v $WORKSPACE:/workspace -w /workspace"
     }
   }
 
@@ -14,6 +14,16 @@ pipeline {
   }
 
   stages {
+    stage('Debug Workspace Path') {
+      steps {
+        sh '''
+          echo "Jenkins WORKSPACE = $WORKSPACE"
+          echo "Listing contents of /workspace:"
+          ls -la /workspace
+        '''
+      }
+    }
+
     stage('Build and Test') {
       steps {
         sh 'cd /workspace/java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
@@ -46,11 +56,11 @@ pipeline {
       }
     }
 
-    stage('Update Deployment File and Push') {
-      agent any
+    stage('Update Deployment File') {
       steps {
         withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
           sh '''
+            cd /workspace
             git config user.email "www.abdularshaik786@gmail.com"
             git config user.name "AbdulR431"
 
