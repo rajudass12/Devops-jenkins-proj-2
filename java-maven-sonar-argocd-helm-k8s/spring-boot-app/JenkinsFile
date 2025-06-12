@@ -15,7 +15,7 @@ pipeline {
     stage('Build and Test') {
       steps {
         sh 'ls -ltr'
-        sh 'mvn clean package'
+        sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
       }
     }
 
@@ -26,6 +26,7 @@ pipeline {
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
           sh '''
+            cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
             mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}
           '''
         }
@@ -39,6 +40,7 @@ pipeline {
       steps {
         script {
           sh '''
+            cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
             docker build -t ${DOCKER_IMAGE} .
           '''
           def dockerImage = docker.image("${DOCKER_IMAGE}")
@@ -58,6 +60,8 @@ pipeline {
         checkout scm
         withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
           sh '''
+            cd ..
+            cd 
             git config user.email "www.abdularshaik786@gmail.com"
             git config user.name "AbdulR431"
             sed -i "s/replaceImageTag/${BUILD_NUMBER}/g spring-boot-app-manifests/deployment.yml"
