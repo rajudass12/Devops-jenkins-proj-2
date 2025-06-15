@@ -9,7 +9,7 @@ pipeline {
     stage('Checkout') {
       steps {
         sh 'echo passed'
-        //git branch: 'main', url: 'https://github.com/saurabhHaldar/Jenkins-Zero-To-Hero.git'
+        //git branch: 'sk-dev', url: 'https://github.com/saurabhHaldar/Jenkins-Zero-To-Hero.git'
       }
     }
     stage('Build and Test') {
@@ -47,7 +47,7 @@ pipeline {
         }
       }
     }
-
+    // deploy file copies to main repo
     stage('Update Deployment File') {
         environment {
             GIT_REPO_NAME = "Jenkins-Zero-To-Hero"
