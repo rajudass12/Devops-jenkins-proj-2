@@ -57,16 +57,46 @@ Java 17+ (Oracle JDK, OpenJDK, or AdoptOpenJDK)
 Hardware Recommendations:
    Minimum 2 GB RAM
    2 CPU cores
-sudo apt update && sudo apt install unzip -y
-adduser sonarqube
-wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.4.1.88267.zip
-unzip *
-chown -R sonarqube:sonarqube /opt/sonarqube
-chmod -R 775 /opt/sonarqube
+ 1. Update system & install dependencies
+bash:
+sudo apt update
+sudo apt install -y openjdk-17-jdk unzip wget
+ 2. Create the sonarqube system user
+bash:
+sudo adduser --system --no-create-home --group --disabled-login sonarqube
+ 3. Download and unzip SonarQube
+bash:
+cd /opt
+sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.4.1.88267.zip
+sudo unzip sonarqube-10.4.1.88267.zip
+ 4. Rename and set permissions
+bash:
+sudo mv sonarqube-10.4.1.88267 sonarqube
+sudo chown -R sonarqube:sonarqube /opt/sonarqube
+ 5. Start SonarQube
+bash:
+sudo su - sonarqube -s /bin/bash
 cd /opt/sonarqube/bin/linux-x86-64
 ./sonar.sh start
-```
+ 6. (Optional) View logs to ensure it started correctly
+bash:
+tail -f /opt/sonarqube/logs/sonar.log
+ 7. Access SonarQube
+Open in your browser:
+http://<your-ec2-public-ip>:9000
+Default login:
+
+Username: admin
+
+Password: admin
+
+🔓 Bonus: Open port 9000 in EC2
+If you haven't already:
+Go to EC2 > Security Groups
+Edit your instance's security group
+Add inbound rule:
+Type: Custom TCP
+Port: 9000
+Source: 0.0.0.0/0 (or restrict to your IP)
 
 Hurray !! Now you can access the `SonarQube Server` on `http://<ip-address>:9000` 
-
-
