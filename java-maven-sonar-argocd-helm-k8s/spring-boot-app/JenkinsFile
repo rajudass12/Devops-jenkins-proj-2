@@ -62,6 +62,7 @@ pipeline {
           sh '''
             git config --global --add safe.directory /var/lib/jenkins/workspace/CI-CD-Job
             pwd
+            ls -la
           '''
         }
       }
