@@ -117,7 +117,14 @@ sudo apt install docker.io
 ### Grant Jenkins user and Ubuntu user permission to docker deamon.
 
 ```
+# Switch to root user
+
 sudo su - 
+```
+
+```
+# Now run the following as root
+
 usermod -aG docker jenkins
 usermod -aG docker ubuntu
 systemctl restart docker
