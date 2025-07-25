@@ -6,6 +6,7 @@ pipeline {
     stage('Test') {
       steps {
         sh 'node --version'
+        input message: 'Enter your name', parameters: [string(defaultValue: 'machine', description: 'This is for input test', name: 'user_name')]
       }
     }
   }
