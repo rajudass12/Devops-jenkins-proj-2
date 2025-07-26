@@ -8,6 +8,9 @@ pipeline {
       }
       steps {
 	checkout scm
+	sh 'pwd'
+	sh 'ls -l'
+	sh 'ls -l my-maven-app'
 	dir('my-maven-app'){      
 	sh 'mvn --version'
 	sh 'ls -l'
