@@ -6,6 +6,7 @@ pipeline {
         docker { image 'maven:3.8.1-adoptopenjdk-11' }
       }
       steps {
+	checkout scm
 	dir('my-maven-app'){      
 	sh 'mvn --version'
 	sh 'ls -l'
