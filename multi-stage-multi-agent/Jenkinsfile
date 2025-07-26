@@ -19,7 +19,11 @@ pipeline {
         docker { image 'node:16-alpine' }
       }
       steps {
+	dir('multi-stage-multi-agent/my-node-app')
+	{
         sh 'node --version'
+	node hello.js
+	}
       }
     }
   }
