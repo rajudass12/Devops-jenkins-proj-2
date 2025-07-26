@@ -6,15 +6,12 @@ pipeline {
         docker { image 'maven:3.8.1-adoptopenjdk-11' }
       }
       steps {
-	dir('my-maven-app')
-	{
-        sh 'mvn --version'
+	sh 'mvn --version'
 	sh 'ls -l'
 	sh 'pwd'
         //sh 'mvn clean package' // Execute Maven build commands
 	//sh 'java -cp target/my-maven-app-1.0-SNAPSHOT.jar com.example.helloworld.App'
       	}
-	}
     }
     stage('Front-end') {
       agent {
