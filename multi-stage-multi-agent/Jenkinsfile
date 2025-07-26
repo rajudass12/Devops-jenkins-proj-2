@@ -7,9 +7,6 @@ pipeline {
       }
       steps {
         sh 'mvn --version'
-	sh 'pwd'
-	sh 'ls -l my-maven-app'
-        sh 'cat pom.xml'
 	sh 'mvn clean package'
         sh 'java -cp target/my-maven-app-1.0-SNAPSHOT.jar com.example.helloworld.App'
       }
