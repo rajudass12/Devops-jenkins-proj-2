@@ -1,35 +1,36 @@
 pipeline {
-  agent none
-  stages {
-    stage('Back-end') {
-      agent {
-        docker { image 'maven:3.8.1-adoptopenjdk-11' 
-		reuseNode true 
-	        args '-u root' }
-      }
-      steps {
-	checkout scm
-	sh 'pwd'
-	sh 'ls -l'
-	sh 'ls -l my-maven-app'
-	dir('my-maven-app'){      
-	sh 'mvn --version'
-	sh 'pwd'
-	sh 'ls -l'
-	sh 'cat pom.xml'
-	
-        //sh 'mvn clean package' // Execute Maven build commands
-	//sh 'java -cp target/my-maven-app-1.0-SNAPSHOT.jar com.example.helloworld.App'
-      	}
-      }
+    agent any
+
+    stages {
+        stage('Back-end') {
+            steps {
+                script {
+                    checkout scm
+
+                    docker.image('maven:3.8.1-adoptopenjdk-11').inside('-u root') {
+                        sh 'echo Inside Maven Docker Container'
+                        sh 'pwd'
+                        sh 'ls -l'
+                        sh 'ls -l my-maven-app'
+                        dir('my-maven-app') {
+                            sh 'mvn --version'
+                            sh 'cat pom.xml'
+                            sh 'mvn clean package'
+                            sh 'java -cp target/my-maven-app-1.0-SNAPSHOT.jar com.example.helloworld.App'
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Front-end') {
+            steps {
+                script {
+                    docker.image('node:16-alpine').inside('-u root') {
+                        sh 'node --version'
+                    }
+                }
+            }
+        }
     }
-    stage('Front-end') {
-      agent {
-        docker { image 'node:16-alpine' }
-      }
-      steps {
-        sh 'node --version'
-      }
-    }
-  }
 }
