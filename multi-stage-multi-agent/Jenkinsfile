@@ -9,8 +9,10 @@ pipeline {
 	dir('my-maven-app')
 	{
         sh 'mvn --version'
-        sh 'mvn clean package' // Execute Maven build commands
-	sh 'java -cp target/my-maven-app-1.0-SNAPSHOT.jar com.example.helloworld.App'
+	sh 'ls -l'
+	sh 'pwd'
+        //sh 'mvn clean package' // Execute Maven build commands
+	//sh 'java -cp target/my-maven-app-1.0-SNAPSHOT.jar com.example.helloworld.App'
       	}
 	}
     }
